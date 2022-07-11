@@ -1,0 +1,3 @@
+tr:not(.table-primary) {
+    cursor: pointer;
+}

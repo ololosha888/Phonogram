@@ -1,0 +1,28 @@
+<div th:fragment="header">
+    <div class="b-example-divider"></div>
+    <header class="py-3 border-bottom bg-light">
+        <div class="container d-flex flex-wrap justify-content-center">
+            <a href="/" class="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto text-dark text-decoration-none">
+                <span class="fs-4">Журнал учёта телефонограмм</span>
+            </a>
+
+            <input type="radio" class="btn-check me-2" name="options-outlined" id="success-outlined" autocomplete="off" checked>
+            <label class="btn btn-outline-default me-2" for="success-outlined">Входящие</label>
+
+            <input type="radio" class="btn-check me-2" name="options-outlined" id="danger-outlined" autocomplete="off">
+            <label class="btn btn-outline-default me-2" for="danger-outlined">Исходящие</label>
+
+            <form class="col-12 col-lg-auto mb-3 mb-lg-0" role="search">
+                <input type="search" class="form-control" placeholder="Поиск" aria-label="Search">
+            </form>
+        </div>
+    </header>
+    <nav class="py-2 bg-light border-bottom">
+        <div class="container">
+            <button type="button" @click="modalWindowChangeTitleAndButton('Добавить', 'add')" class="btn btn-success me-2" data-bs-toggle="modal" data-bs-target="#modalWindow">Добавить</button>
+            <button type="button" @click="modalWindowChangeTitleAndButton('Изменить', 'edit')" class="btn btn-warning me-2" data-bs-toggle="modal" data-bs-target="#modalWindow">Изменить</button>
+            <button type="button" class="btn btn-danger me-2" @click="removePhonogram">Удалить</button>
+            <input name="currentIdPhonogram" id="currentIdPhonogram" ref="currentIdPhonogram" type="text" value="" hidden>
+        </div>
+    </nav>
+</div>

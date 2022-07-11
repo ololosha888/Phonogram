@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  web_app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    expose:
+      - "8080"
+    depends_on:
+      - web_server
+  web_server:
+    restart: always
+    build:
+      context: ./docker-tools
+      dockerfile: Dockerfile
+    ports:
+      - 80:80

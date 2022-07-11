@@ -1,0 +1,55 @@
+<div th:fragment="modalWindow">
+    <div class="modal fade" id="modalWindow" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <form action="/" method="post" ref="modalForm">
+                    <div class="modal-header">
+                        <h5 class="modal-title">{{windowTitle}} телефонограмму</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input name="id" v-model="currentIdPhonogram" hidden>
+                        <input name="item" class="form-control form-control-sm mb-2" required type="text" placeholder="Номер" v-model="phonogram.item">
+                        <input name="registrationDate" type="date" class="form-control mb-2" required v-model="phonogram.registrationDate">
+                        <textarea name="message" class="form-control mb-2" rows="3" placeholder="Сообщение" required v-model="phonogram.message"></textarea>
+                        <!-- Создатель -->
+                        <small class="text-muted">Создатель</small>
+                        <select class="form-select mb-2" v-model="writerSelectedDepartment" @change="changeWriterSelectedDepartment()">
+                            <option selected disabled value="-1">Организация</option>
+                            <option th:each="department : ${departments}" th:value="${department.id}" th:text="${department.title}"/>
+                        </select>
+                        <select name="writer" class="form-select mb-2" id="writer_id" ref="writer_id" required v-model="phonogram.writer">
+                            <option selected disabled value="">Создатель</option>
+                            <option th:each="person : ${persons}" th:value="${person.id}" th:text="${person.fio}" th:department="${person.department.id}"/>
+                        </select>
+                        <!-- Отправитель -->
+                        <small class="text-muted">Отправитель</small>
+                        <select class="form-select mb-2" v-model="senderSelectedDepartment" @change="changeSenderSelectedDepartment()">
+                            <option selected disabled value="-1">Организация</option>
+                            <option th:each="department : ${departments}" th:value="${department.id}" th:text="${department.title}"/>
+                        </select>
+                        <select name="sender" class="form-select mb-2" id="sender_id" ref="sender_id" required v-model="phonogram.sender">
+                            <option selected disabled value="">Отправитель</option>
+                            <option th:each="person : ${persons}" th:value="${person.id}" th:text="${person.fio}" th:department="${person.department.id}"/>
+                        </select>
+                        <!-- Получатель -->
+                        <small class="text-muted">Получатель</small>
+                        <select class="form-select mb-2" v-model="receiverSelectedDepartment" @change="changeReceiverSelectedDepartment()">
+                            <option selected disabled value="-1">Организация</option>
+                            <option th:each="department : ${departments}" th:value="${department.id}" th:text="${department.title}"/>
+                        </select>
+                        <select name="receiver" class="form-select mb-2" id="receiver_id" ref="receiver_id" required v-model="phonogram.receiver">
+                            <option selected disabled value="">Получатель</option>
+                            <option th:each="person : ${persons}" th:value="${person.id}" th:text="${person.fio}" th:department="${person.department.id}"/>
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" @click="clearForm" class="btn btn-primary">Очистить</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                        <button type="submit" class="btn" v-bind:class="modalWindowButtonStyle">Сохранить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
